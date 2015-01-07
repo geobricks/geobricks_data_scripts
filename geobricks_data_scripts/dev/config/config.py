@@ -33,10 +33,10 @@ settings = {
         # Folders
         "folders": {
             "config": "config/",
-            "tmp": "tmp_path",
-            "geoserver_datadir": "/home/vortex/programs/SERVERS/tomcat_geoservers/geoservers-test/data/",
-            "distribution": "distribution_folder",
-            "storage": "storage_folder"
+            "tmp": "/home/vortex/Desktop/LAYERS/geobricks/tmp/",
+            "geoserver_datadir": "/home/vortex/programs/SERVERS/tomcat_geoservers/geoserver_data_2_5_3/data/",
+            "distribution": "/home/vortex/Desktop/LAYERS/geobricks/distribution/",
+            "storage": "/home/vortex/Desktop/LAYERS/geobricks/storage/"
         },
 
         # Geoserver
@@ -51,8 +51,15 @@ settings = {
         "metadata": {
             "url_create_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata",
             "url_get_metadata_uid": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
+
+            # get metadata
             "url_get_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/find",
-            "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources"
+            "url_get_full_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
+
+            # coding system
+            "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources",
+            "url_data_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources/data/uid/<uid>"
+
         }
     }
 }
