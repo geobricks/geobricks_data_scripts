@@ -7,7 +7,7 @@ import csv
 data_manager = get_data_manager()
 
 
-data_manager.delete_coveragestore("ghg:organic_soil_surface_area")
+data_manager.delete("ghg:organic_soil_surface_area")
 
 # def delete_uid(uid):
 #     try:

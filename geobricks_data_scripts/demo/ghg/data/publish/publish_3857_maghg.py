@@ -113,7 +113,7 @@ def publish_maghg(input_folder):
 
                 # delete if import failed
                 #uid = metadata_def["dsd"]["workspace"] + ":" + metadata_def["dsd"]["layerName"]
-                #data_manager.delete_coveragestore(metadata_def["dsd"]["workspace"] + ":" + metadata_def["dsd"]["layerName"])
+                #data_manager.delete(metadata_def["dsd"]["workspace"] + ":" + metadata_def["dsd"]["layerName"])
 
 
                 #  fix of some styles

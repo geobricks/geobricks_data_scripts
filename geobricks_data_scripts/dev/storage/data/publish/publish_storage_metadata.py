@@ -8,7 +8,7 @@ from geobricks_common.core.filesystem import sanitize_name, get_filename
 
 from geobricks_data_scripts.utils.filesystem import get_filename
 from geobricks_data_scripts.utils.date import get_range_dates_metadata_yearly
-from geobricks_data_scripts.demo.utils.data_manager_util import get_data_manager
+from geobricks_data_scripts.dev.utils.data_manager_util import get_data_manager
 
 # data manager
 data_manager = get_data_manager()
@@ -57,11 +57,9 @@ def create_metadata(title, product, date=None, default_style=None, map_projectio
         metadata_def["meContent"]["seCoverage"]["coverageTime"] = {"from": from_date, "to": to_date }
 
 
-
-    if default_style is not None:
-        metadata_def["dsd"]["defaultStyle"] = default_style
-
     # storeType:
+    metadata_def["dsd"]["datasource"] = datasource
+
     metadata_def["dsd"]["datasource"] = datasource
 
     # TODO: add uid_distribution id

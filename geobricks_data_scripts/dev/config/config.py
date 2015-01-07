@@ -52,14 +52,16 @@ settings = {
             "url_create_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata",
             "url_get_metadata_uid": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
 
+            # delete metadata
+            "url_delete_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
+
             # get metadata
             "url_get_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/find",
-            "url_get_full_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
+            "url_get_metadata_full": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
 
             # coding system
             "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources",
             "url_data_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources/data/uid/<uid>"
-
         }
     }
 }
