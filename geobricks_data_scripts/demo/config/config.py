@@ -52,7 +52,8 @@ settings = {
             "url_create_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata",
             "url_get_metadata_uid": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>",
             "url_get_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/find",
-            "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources"
+            "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources",
+            "url_delete_metadata": "http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/<uid>"
         }
     }
 }
