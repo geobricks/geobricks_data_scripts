@@ -61,7 +61,10 @@ settings = {
 
             # coding system
             "url_create_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources",
-            "url_data_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources/data/uid/<uid>"
+            "url_data_coding_system": "http://fenix.fao.org/d3s_dev/msd/resources/data/uid/<uid>",
+
+            # DSD
+            "url_overwrite_dsd_rid": "http://fenix.fao.org/d3s_dev/msd/resources/dsd"
         }
     }
 }

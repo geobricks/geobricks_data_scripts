@@ -23,13 +23,13 @@ def create_metadata(title, product, date=None, default_style=None, map_projectio
         "creationDate": calendar.timegm(datetime.datetime.now().timetuple()) * 1000,
         "meContent": {
             "resourceRepresentationType": "geographic",
-            "seCoverage": {
-                "coverageSectors": {
-                    "idCodeList": "layer_products",
-                    "version": "1.0",
-                    "codes": [{"code": sanitize_name(product)}]
-                },
-            }
+            # "seCoverage": {
+            #     "coverageSectors": {
+            #         "idCodeList": "layer_products",
+            #         "version": "1.0",
+            #         "codes": [{"code": sanitize_name(product)}]
+            #     },
+            # }
         },
         "meSpatialRepresentation": {
             "layerType": "raster" if is_raster else "vector"
@@ -49,6 +49,7 @@ def create_metadata(title, product, date=None, default_style=None, map_projectio
             # "layerName": "layername",
             "layerName": sanitize_name(title["EN"] if "EN" in title else title),
         }
+
     }
 
     # get date range
@@ -60,12 +61,15 @@ def create_metadata(title, product, date=None, default_style=None, map_projectio
     # storeType:
     metadata_def["dsd"]["datasource"] = datasource
 
-    metadata_def["dsd"]["datasource"] = datasource
+    # distribution uid
+
+    metadata_def["dsd"]["contextExtension"] = {
+        "distribution": [{"uid": ""}]
+    }
 
     # TODO: add uid_distribution id
 
     return metadata_def
-
 
 
 def publish(input_folder):
@@ -73,6 +77,7 @@ def publish(input_folder):
 
     # filename
     for input_file in input_files:
+        print input_file
         filename = get_filename(input_file)
         filename, projection_code = filename.split("_")
         projection_code = "EPSG:" + projection_code
@@ -88,6 +93,7 @@ def publish(input_folder):
         except Exception, e:
             print e
 
+# http://fenix.fao.org/d3s_dev/msd/resources/metadata/uid/mod13a2
 
 # Publishing data
-publish("/home/vortex/Desktop/LAYERS/geobricks/storage/raster/mod13a2_3857/")
+publish("/home/vortex/Desktop/LAYERS/geobricks/storage/raster/mod13a2_4326/")

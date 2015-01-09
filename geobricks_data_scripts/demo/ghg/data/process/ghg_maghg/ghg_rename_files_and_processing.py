@@ -110,8 +110,9 @@ def rename_lyr_filenames():
         os.rename(f, renamed_file)
 
 
-rename_lyr_filenames()
-lyr_filenames()
+# rename_lyr_filenames()
+# lyr_filenames()
+# process()
 
 
 
