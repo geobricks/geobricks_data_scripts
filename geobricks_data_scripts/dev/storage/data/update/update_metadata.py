@@ -11,8 +11,8 @@ def update_dsd_with_wms_and_datasource(wms_url,  datasource):
         dsd = l["dsd"]
         dsd["datasource"] = datasource
         print l["uid"], dsd
-        result = data_manager.metadata_manager.overwrite_dsd_rid(dsd)
-        print result
+        #result = data_manager.metadata_manager.overwrite_dsd_rid(dsd)
+        #print result
         # update_dsd_with_wms_and_datasource_by_uid(l["uid"], wms_url,  datasource)
 
 
@@ -25,5 +25,5 @@ def update_dsd_with_wms_and_datasource_by_uid(uid, wms_url,  datasource):
 
 
 
-# update_dsd_with_wms_and_datasource("http://fenix.fao.org/geoserver", "geoserver")
+update_dsd_with_wms_and_datasource("http://fenix.fao.org/geoserver", "geoserver")
 # update_dsd_with_wms_and_datasource_by_uid("mod13a2", "http://fenix.fao.org/geoserver", "geoserver")
