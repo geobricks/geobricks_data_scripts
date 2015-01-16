@@ -6,7 +6,7 @@ import json
 import os
 
 from geobricks_data_scripts.utils.filesystem import get_filename
-from geobricks_data_scripts.utils.date import get_range_dates_metadata_yearly
+from geobricks_common.core.date import get_daterange
 from geobricks_data_scripts.demo.utils.data_manager_util import get_data_manager
 
 # data manager
@@ -58,7 +58,7 @@ def create_metadata(title, product, date=None, default_style=None, map_projectio
 
     # get date range
     if date is not None:
-        from_date, to_date = get_range_dates_metadata_yearly(date)
+        from_date, to_date = get_daterange(date)
         metadata_def["meContent"]["seCoverage"]["coverageTime"] = {"from": from_date, "to": to_date }
 
 
