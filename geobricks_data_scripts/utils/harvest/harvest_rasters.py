@@ -2,12 +2,14 @@ import os
 import glob
 import pyproj
 import datetime
+import simplejson
 from geobricks_common.core.log import logger
 from geobricks_common.core.filesystem import get_filename, get_file_extension
 from geobricks_common.core.date import get_daterange
 from geobricks_common.core.filesystem import sanitize_name
 from geobricks_data_scripts.utils.metadata.metadata import create_metadata
 from geobricks_gis_raster.core.raster import get_authority
+from geobricks_common.core.utils import dict_merge
 
 log = logger(__file__)
 
@@ -15,30 +17,50 @@ language = "EN"
 
 supported_file = ["tif", "tiff", "geotiff", "TIFF", "TIF", "GEOTIFF"]
 
-metadata_file = ["json"]
 
-
-def harvest_raster_folder(path, workspace=None):
+def harvest_raster_folder(path):
     # read files
+    metadatas = []
     files = glob.glob(os.path.join(path, "*"))
+
+    # getting product code from the folder name
+    product_code = os.path.basename(os.path.normpath(path))
+
     for f in files:
-        # sanitize file name?
-        filename = get_filename(f)
-        extension = get_file_extension(f)
-        if extension in supported_file:
-            log.info(filename)
-            metadata = parse_filename(filename, get_authority(f).upper())
-            metadata = create_metadata(metadata)
+        if os.path.isfile(f):
+            metadata = None
+            # sanitize file name?
+            filename = get_filename(f)
+            extension = get_file_extension(f)
 
-            # check if exists a file named like the "file".json ( and in case overwrite the what is used there)
-            #metadata_file =
-            print metadata
+            # check if is not a json
+            if extension in supported_file and extension is not "json":
+                log.info(filename)
+                metadata = parse_filename(filename, get_authority(f).upper(), product_code)
+                metadata = create_metadata(metadata)
 
-        if extension in metadata_file:
-            log.info(filename)
+                # check metadata .json (if exists for the file) with or without projections code at the end
+                metadata_file_prj = os.path.join(path, filename + ".json")
+                if os.path.isfile(metadata_file_prj):
+                    with open(metadata_file_prj) as m_file:
+                        d = simplejson.load(m_file)
+                        metadata = dict_merge(metadata, d)
+
+                metadata_file = os.path.join(path, "_".join(filename.split("_")[:(len(filename.split("_"))-1)]) + ".json")
+                if os.path.isfile(metadata_file):
+                    with open(metadata_file) as m_file:
+                        d = simplejson.load(m_file)
+                        metadata = dict_merge(metadata, d)
 
 
-def parse_filename(filename, map_projection_code):
+            if metadata:
+                metadata["path"] = f
+                metadatas.append(metadata)
+    return metadatas
+
+
+# the product_code is usually gived by the folder name
+def parse_filename(filename, map_projection_code, product_code=None):
     # get name, date, proj
     filename = filename
     s = filename.split("_")
@@ -63,9 +85,13 @@ def parse_filename(filename, map_projection_code):
             s.remove(date)
 
     # product (in case it skips the date)
-    product_code = sanitize_name(' '.join(s))
+    if product_code is None:
+        product_code = sanitize_name(' '.join(s))
+    else:
+        product_code = sanitize_name(product_code)
+
     product_label = sanitize_name(' '.join(s))
-    sanitized_title = sanitize_name(title)
+    sanitized_title = sanitize_name(title) + "_" + prj
 
     layerName = sanitized_title
 
@@ -94,9 +120,8 @@ def parse_filename(filename, map_projection_code):
 
     return metadata
 
+# TODO: check prj
 def check_prj(prj):
     print "Check if prj is valid or is the name"
+    return True
 
-
-
-harvest_raster_folder("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/Theory_structure_novemeber_13/Cultivation_organic_soils_croplands/publish/")

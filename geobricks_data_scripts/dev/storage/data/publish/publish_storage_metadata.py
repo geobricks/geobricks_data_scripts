@@ -89,7 +89,7 @@ def publish(input_folder):
         try:
             print metadata_def
             # upload
-            # data_manager.publish_coveragestore_storage(input_file, metadata_def, False, False, True)
+            print data_manager.publish_coveragestore_storage(input_file, metadata_def, False, False, True)
         except Exception, e:
             print e
 
