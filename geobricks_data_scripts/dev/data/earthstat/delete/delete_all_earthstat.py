@@ -8,5 +8,5 @@ for layer in layers:
         if "earthstat" in layer["dsd"]["workspace"]:
             data_manager.delete(layer["uid"])
     except Exception, e:
-        print e
+        print "Error", e
         pass
