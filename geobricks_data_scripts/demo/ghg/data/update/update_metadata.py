@@ -12,6 +12,7 @@ def update_dsd_with_wms_and_datasource(wms_url,  datasource):
         dsd = l["dsd"]
         dsd["datasource"] = datasource
         print l["uid"], dsd
+        update_dsd_with_epsg_in_layername(l["uid"])
         #update_dsd_with_wms_and_datasource_by_uid(l["uid"], wms_url,  datasource)
 
 
@@ -24,6 +25,19 @@ def update_dsd_with_wms_and_datasource_by_uid(uid, wms_url,  datasource):
     print result
 
 
+def update_dsd_with_epsg_in_layername(uid, epsg="3857"):
+    layer = data_manager.metadata_manager.get_by_uid(uid, False, True)
+    dsd = layer["dsd"]
+    print dsd
+    #dsd["layerName"] = dsd["layerName"] + "_" + epsg
+    # print dsd["layerName"]
+    # dsd["layerName"] = dsd["layerName"].replace("_3857", "")
+    # print dsd["layerName"]
+    #print dsd
+    #result = data_manager.metadata_manager.overwrite_dsd_rid(dsd)
+    #print result
 
-update_dsd_with_wms_and_datasource("http://fenix.fao.org/geoserver", "geoserver")
+
+
+update_dsd_with_wms_and_datasource("//fenix.fao.org/geoserver", "geoserver")
 # update_dsd_with_wms_and_datasource_by_uid("mod13a2", "http://fenix.fao.org/geoserver", "geoserver")
