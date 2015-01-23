@@ -2,7 +2,7 @@ import csv
 import json
 
 from geobricks_metadata_manager.core.metadata_manager_d3s_core import MetadataManager
-from geobricks_data_scripts.demo.config.config import settings
+from geobricks_data_scripts.test.config.config import settings
 
 metadata_manager = MetadataManager(settings)
 

@@ -1,68 +1,23 @@
-cultivation_organic_soils,Cultivation Organic Soils
-gfed4_burned_areas_-_barren_or_sparsely_vegetated,GFED4 Burned Areas - Barren or sparsely vegetated
-gfed4_burned_areas_-_closed_shrubland,GFED4 Burned Areas - Closed shrubland
-gfed4_burned_areas_-_croplands,GFED4 Burned Areas - Croplands
-gfed4_burned_areas_-_deciduous_broadleaf_forest,GFED4 Burned Areas - Deciduous Broadleaf forest
-gfed4_burned_areas_-_deciduous_needleleaf_forest,GFED4 Burned Areas - Deciduous Needleleaf forest
-gfed4_burned_areas_-_evergreen_broadleaf_forest,GFED4 Burned Areas - Evergreen Broadleaf forest
-gfed4_burned_areas_-_evergreen_needleleaf_forest,GFED4 Burned Areas - Evergreen Needleleaf forest
-gfed4_burned_areas_-_grassland,GFED4 Burned Areas - Grassland
-gfed4_burned_areas_-_humid_tropical_forest,GFED4 Burned Areas - Humid Tropical Forest
-gfed4_burned_areas_-_mixed_forest,GFED4 Burned Areas - Mixed forest
-gfed4_burned_areas_-_open_shrubland,GFED4 Burned Areas - Open shrubland
-gfed4_burned_areas_-_organic_soils,GFED4 Burned Areas - Organic soils
-gfed4_burned_areas_-_other_forest,GFED4 Burned Areas - Other forest
-gfed4_burned_areas_-_savanna,GFED4 Burned Areas - Savanna
-gfed4_burned_areas_-_unclassified,GFED4 Burned Areas - Unclassified
-gfed4_burned_areas_-_urban_and_built-up,GFED4 Burned Areas - Urban and built-up
-gfed4_burned_areas_-_woody_savanna,GFED4 Burned Areas - Woody savanna
+cultivation_organic_soils_-_croplands,Cultivation Organic Soils - Croplands
+burned_areas_-_barren_or_sparsely_vegetated,Burned Areas - Barren or sparsely vegetated
+burned_areas_-_closed_shrubland,Burned Areas - Closed shrubland
+burned_areas_-_croplands,Burned Areas - Croplands
+burned_areas_-_deciduous_broadleaf_forest,Burned Areas - Deciduous Broadleaf forest
+burned_areas_-_deciduous_needleleaf_forest,Burned Areas - Deciduous Needleleaf forest
+burned_areas_-_evergreen_broadleaf_forest,Burned Areas - Evergreen Broadleaf forest
+burned_areas_-_evergreen_needleleaf_forest,Burned Areas - Evergreen Needleleaf forest
+burned_areas_-_grassland,Burned Areas - Grassland
+burned_areas_-_humid_tropical_forest,Burned Areas - Humid Tropical Forest
+burned_areas_-_mixed_forest,Burned Areas - Mixed forest
+burned_areas_-_open_shrubland,Burned Areas - Open shrubland
+burned_areas_-_organic_soils,Burned Areas - Organic soils
+burned_areas_-_other_forest,Burned Areas - Other forest
+burned_areas_-_savanna,Burned Areas - Savanna
+burned_areas_-_unclassified,Burned Areas - Unclassified
+burned_areas_-_urban_and_built-up,Burned Areas - Urban and built-up
+burned_areas_-_woody_savanna,Burned Areas - Woody savanna
 global_ecological_zones_(gez)_2010,Global Ecological Zones (GEZ) 2010
 global_land_cover_2000_(glc2000),Global Land Cover 2000 (GLC2000)
 gridded_livestock_of_the_world_v_201,Gridded Livestock of the World v2.01
 jrc_climate_zone,JRC climate zone
 modis_-_land_cover_type_umd,MODIS - Land Cover Type UMD
-dm_burning_grasslands,DM Burning Grasslands
-ch4_emissions_burning_woodysavanna,CH4 Emissions Burning WoodySavanna
-n2o_emissions_burning_grasslands,N2O Emissions Burning Grasslands
-n2o_emissions_burning_woodysavanna,N2O Emissions Burning WoodySavanna
-co2_emissions_burning_closedshrublands,CO2 Emissions Burning ClosedShrublands
-co2_emissions_burning_openshrublands,CO2 Emissions Burning OpenShrublands
-co2_emissions_burning_humidtropicalforests,CO2 Emissions Burning HumidTropicalForests
-dm_burning_openshrublands,DM Burning OpenShrublands
-n2o_emissions_burning_otherforests,N2O Emissions Burning OtherForests
-n2o_emissions_burning_humidtropicalforests,N2O Emissions Burning HumidTropicalForests
-n2o_emissions_burning_savanna,N2O Emissions Burning Savanna
-ch4_emissions_burning_humidtropicalforests,CH4 Emissions Burning HumidTropicalForests
-ch4_emissions_burning_peatlands,CH4 Emissions Burning Peatlands
-n2o_emissions_burning_peatlands,N2O Emissions Burning Peatlands
-ch4_emissions_burning_closedshrublands,CH4 Emissions Burning ClosedShrublands
-co2_emissions_burning_grasslands,CO2 Emissions Burning Grasslands
-ch4_emissions_burning_grasslands,CH4 Emissions Burning Grasslands
-openshrublands_fuelbiomass,OpenShrublands FuelBiomass
-co2_emissions_burning_woodysavanna,CO2 Emissions Burning WoodySavanna
-ch4_emissions_burning_otherforests,CH4 Emissions Burning OtherForests
-dm_burning_closedshrublands,DM Burning ClosedShrublands
-dm_burning_woodysavanna,DM Burning WoodySavanna
-ch4_emissions_burning_savanna,CH4 Emissions Burning Savanna
-co2_emissions_burning_otherforests,CO2 Emissions Burning OtherForests
-n2o_emissions_burning_closedshrublands,N2O Emissions Burning ClosedShrublands
-co2_emissions_burning_peatlands,CO2 Emissions Burning Peatlands
-co2_emissions_burning_savanna,CO2 Emissions Burning Savanna
-dm_burning_peatlands,DM Burning Peatlands
-dm_burning_humidtropicalforests,DM Burning HumidTropicalForests
-savanna_fuelbiomass,Savanna FuelBiomass
-n2o_emissions_burning_openshrublands,N2O Emissions Burning OpenShrublands
-tropical_forests_ch4_ef,Tropical Forests CH4 EF
-dm_burning_savanna,DM Burning Savanna
-ch4_emissions_burning_openshrublands,CH4 Emissions Burning OpenShrublands
-dm_burning_otherforests,DM Burning OtherForests
-tropical_forests_fuelbiomass,Tropical Forests FuelBiomass
-woodysavanna_fuelbiomass,WoodySavanna FuelBiomass
-grasslands_fuelbiomass,Grasslands FuelBiomass
-nontropical_forests_fuelbiomass,NonTropical Forests FuelBiomass
-tropical_forests_co2_ef,Tropical Forests CO2 EF
-extratropical_forests_n2o_ef,ExtraTropical Forests N2O EF
-closedshrublands_fuelbiomass,ClosedShrublands FuelBiomass
-tropical_forests_n2o_ef,Tropical Forests N2O EF
-extratropical_forests_co2_ef,ExtraTropical Forests CO2 EF
-extratropical_forests_ch4_ef,ExtraTropical Forests CH4 EF

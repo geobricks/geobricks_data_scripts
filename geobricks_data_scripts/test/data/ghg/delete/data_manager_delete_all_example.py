@@ -1,5 +1,4 @@
-
-from geobricks_data_scripts.dev.utils.data_manager_util import get_data_manager
+from geobricks_data_scripts.test.utils.data_manager_util import get_data_manager
 
 data_manager = get_data_manager()
 layers = data_manager.get_all_layers()

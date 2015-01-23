@@ -1,4 +1,4 @@
-from geobricks_data_scripts.demo.utils.data_manager_util import get_data_manager
+from geobricks_data_scripts.test.utils.data_manager_util import get_data_manager
 
 data_manager = get_data_manager()
 

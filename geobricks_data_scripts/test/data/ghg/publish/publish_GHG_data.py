@@ -1,14 +1,14 @@
 import os
 import glob
 from geobricks_common.core.log import logger
-from geobricks_data_scripts.dev.utils.data_manager_util import get_data_manager
-from geobricks_data_scripts.utils.harvest.publish_harvest import harvest_folder, update_folder_style
+from geobricks_data_scripts.test.utils.data_manager_util import get_data_manager
+from geobricks_data_scripts.utils.harvest.publish_harvest import harvest_folder
 
 log = logger(__file__)
 
 data_manager = get_data_manager()
 
-workspace = "test"
+workspace = "ghg"
 
 
 def default_import(src_folder):
@@ -45,8 +45,8 @@ if __name__ == '__main__':
     # Burned areas
     burned_areas(os.path.join(base_folder, "GFED4_BURNEDAREAS_BY_LANDCOVER"))
 
-    # GLC 2000
-    default_import(os.path.join(base_folder, "Global_Land_Cover_2000_(GLC_2000)", "Global_Land_Cover_2000_(GLC_2000)"))
+    # GLC 2000 (TODO: set the style)
+    #default_import(os.path.join(base_folder, "Global_Land_Cover_2000_(GLC_2000)", "Global_Land_Cover_2000_(GLC_2000)"))
 
     # griddedlivestock
     default_import(os.path.join(base_folder, "GriddedLivestock", "gridded_livestock_of_the_world_v_201"))
