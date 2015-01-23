@@ -45,4 +45,19 @@ def create_folder(path, filename):
 
 
 
-process_files()
+
+
+def move_to_another_folder(src_folder, file_type="geotiff"):
+    folders = glob.glob(os.path.join(src_folder, "*"))
+    for folder in folders:
+        if os.path.isdir(folder):
+            files = glob.glob(os.path.join(folder, "*." + file_type))
+            for f in files:
+                print f, src_folder
+                filename = get_filename(f)
+                output_path = os.path.join(src_folder, filename+ "." + file_type)
+                shutil.copyfile(f, output_path)
+
+
+#process_files()
+move_to_another_folder("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/MAGHG-data/OUTPUT/storage/")

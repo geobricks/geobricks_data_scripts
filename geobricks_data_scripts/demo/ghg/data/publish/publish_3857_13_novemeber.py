@@ -75,7 +75,7 @@ def publish_data_GriddedLivestock(input_folder):
         metadata_def = create_metadata(title, product, date, sldname)
         try:
             print json.dumps(metadata_def)
-            data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+            data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
         except Exception, e:
             print e
         #manager.publish_coverage(input_file, metadata_def, False, False)
@@ -97,7 +97,7 @@ def publish_data_Climate_Zones_processed(input_folder):
         metadata_def = create_metadata(title, product, date, sldname, map_projection_code)
         try:
             print json.dumps(metadata_def)
-            data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+            data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
         except Exception, e:
             print e
         #manager.publish_coverage(input_file, metadata_def, False, False)
@@ -119,7 +119,7 @@ def publish_data_modis_landcover(input_folder):
         metadata_def = create_metadata(title, product, date, sldname, map_projection_code)
         try:
             print json.dumps(metadata_def)
-            data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+            data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
         except Exception, e:
             print e
         #manager.publish_coverage(input_file, metadata_def, False, False)
@@ -149,7 +149,7 @@ def publish_burnerdareas():
                     metadata_def = create_metadata(title, product, date, sldname)
                     try:
                         print json.dumps(metadata_def)
-                        data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+                        data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
                     except Exception, e:
                         print e
                     #manager.publish_coverage(input_file, metadata_def, False, False)
@@ -163,7 +163,7 @@ def publish_burnerdareas():
                     metadata_def = create_metadata(title, product, date, sldname)
                     try:
                         print json.dumps(metadata_def)
-                        data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+                        data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
                     except Exception, e:
                         print e
                     #manager.publish_coverage(input_file, metadata_def, False, False)
@@ -179,7 +179,7 @@ def publish_burnerdareas():
                 metadata_def = create_metadata(title, product, date, sldname)
                 try:
                     print json.dumps(metadata_def)
-                    data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+                    data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
                 except Exception, e:
                     print e
 
@@ -245,7 +245,7 @@ def publish_area_of_histosols(path):
         metadata_def = create_metadata(title, product, date, sldname)
         try:
             print json.dumps(metadata_def)
-            data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+            data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
         except Exception, e:
             print e
 
@@ -260,7 +260,7 @@ def publish_gez(path):
         metadata_def = create_metadata(title, product, date, sldname)
         try:
             print json.dumps(metadata_def)
-            data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+            data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
         except Exception, e:
             print e
 
@@ -275,7 +275,7 @@ def publish_ghg_glc2000_v1_1(path):
         metadata_def = create_metadata(title, product, date, sldname)
         try:
             print json.dumps(metadata_def)
-            data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+            data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
         except Exception, e:
             print e
 
@@ -292,7 +292,7 @@ def publish_cultivation_organic_soils_croplands(path):
         metadata_def = create_metadata(title, product, date, sldname)
         try:
             print json.dumps(metadata_def)
-            data_manager.publish_coveragestore(input_file, metadata_def, False, False, True)
+            data_manager.publish_coveragestore(input_file, metadata_def, False, True, False)
         except Exception, e:
             print e
 
@@ -310,7 +310,7 @@ def sanitize_name(name):
 
 # publish_data_GriddedLivestock("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/GriddedLivestock/to_publish_3857/")
 # publish_data_Climate_Zones_processed("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/Climate_Zones_processed/to_publish/")
-publish_data_modis_landcover("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/MCD12Q1/processed_2009/3857/")
+# publish_data_modis_landcover("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/MCD12Q1/processed_2009/3857/")
 # publish_burnerdareas()
 # publish_area_of_histosols("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/HWSD/3857/")
 # publish_gez("/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/gez_raster/3857/")
