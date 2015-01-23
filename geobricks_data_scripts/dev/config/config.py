@@ -43,8 +43,8 @@ settings = {
         "geoserver": {
             "geoserver_master": "http://localhost:9090/geoserver/rest",
             "geoserver_slaves": [],
-            "username": "fenix",
-            "password": "Fenix2014",
+            "username": "admin",
+            "password": "geoserver",
         },
 
         # Metadata
