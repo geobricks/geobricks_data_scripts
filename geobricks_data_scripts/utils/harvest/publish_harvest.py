@@ -5,32 +5,36 @@ log = logger(__file__)
 
 
 # TODO: apply publish on storage and geoserver
-def harvest_folder(data_manager, folder, workspace=None, publish_on_geoserver=True, publish_on_storage=True, update_links=True):
+def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, publish_on_storage=True, update_links=True, metadata_json=None):
     metadatas = harvest_raster_folder(folder)
     print metadatas
 
     # harvest 3857 for publication
     for metadata in metadatas:
-        print metadata
+        log.info(metadata)
         # check epsg
         if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] == "EPSG:3857":
             if "workspace" not in metadata["dsd"]:
                 metadata["dsd"]["workspace"] = workspace
             if publish_on_geoserver:
-                publish_geoserver(data_manager, metadata["path"], metadata)
+                metadata = publish_geoserver(data_manager, metadata["path"], metadata)
+                log.info(metadata)
+
 
     # harvest 4326 (or others) to storage
     # it's done after the 3857 it's sure the metadata will be there
     for metadata in metadatas:
+        log.info(metadata)
         if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
             if publish_on_storage:
-                publish_storage(data_manager, metadata["path"], metadata, workspace)
+                metadata = publish_storage(data_manager, metadata["path"], metadata, workspace)
+                log.info(metadata)
 
-
+    log.info(metadatas)
     if update_links:
         # link 3857 layer to 4326 distribution layer
         for metadata in metadatas:
-            print metadata
+            log.info(metadata)
             # check epsg
             if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] == "EPSG:3857":
                 update_dsd_layer_to_distribution_layer(data_manager, metadata)
@@ -38,7 +42,7 @@ def harvest_folder(data_manager, folder, workspace=None, publish_on_geoserver=Tr
 
         # link 4326 layer to 3857 visualization layer
         for metadata in metadatas:
-            print metadata
+            log.info(metadata)
             # check epsg
             if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
                 update_dsd_layer_to_visualization_layer(data_manager, metadata, workspace)
@@ -69,17 +73,19 @@ def update_folder_style(data_manager, folder, style=None):
 
 
 def update_dsd_layer_to_distribution_layer(data_manager, metadata):
+    log.info(metadata)
     update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], "4326", "distribution")
 
 
 def update_dsd_layer_to_visualization_layer(data_manager, metadata, workspace):
+    log.info(metadata)
     update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], "3857", "visualization", workspace)
 
 
 def publish_geoserver(data_manager, path, metadata):
     log.info("publish on geoserver")
     try:
-        data_manager.publish_coveragestore(path, metadata)
+        return data_manager.publish_coveragestore(path, metadata)
     except Exception, e:
         log.error(e)
 
@@ -87,7 +93,7 @@ def publish_geoserver(data_manager, path, metadata):
 def publish_storage(data_manager, path, metadata, workspace=None, uid_distribution=True):
     log.info("publish on storage")
     try:
-        data_manager.publish_coveragestore_storage(path, metadata, False, False, True)
+        return data_manager.publish_coveragestore_storage(path, metadata, False, False, True)
     except Exception, e:
         log.error(e)
 
@@ -130,4 +136,5 @@ def update_dsd_layer_with_layer_dist_or_vis(data_manager, uid, epsg_code="4326",
     except Exception, e:
         # log.error("No metadata found for ", str(layer_uid))
         log.error(e)
+
 

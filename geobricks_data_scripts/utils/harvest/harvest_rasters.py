@@ -18,13 +18,13 @@ language = "EN"
 supported_file = ["tif", "tiff", "geotiff", "TIFF", "TIF", "GEOTIFF"]
 
 
-def harvest_raster_folder(path):
+def harvest_raster_folder(path, publish_metadata=True, publish_geoserver=True, publish_storage=True):
     # read files
     metadatas = []
     files = glob.glob(os.path.join(path, "*"))
 
     # getting product code from the folder name
-    product_code = os.path.basename(os.path.normpath(path))
+    product_code = sanitize_name(os.path.basename(os.path.normpath(path)))
 
     for f in files:
         if os.path.isfile(f):
@@ -51,6 +51,7 @@ def harvest_raster_folder(path):
                     with open(metadata_file) as m_file:
                         d = simplejson.load(m_file)
                         metadata = dict_merge(metadata, d)
+
 
 
             if metadata:

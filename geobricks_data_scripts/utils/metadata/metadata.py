@@ -1,9 +1,12 @@
 import calendar
 import datetime
+from geobricks_common.core.log import logger
 
+log = logger(__file__)
 
 
 def create_metadata(metadata):
+    log.info(metadata)
 
     product_codelist_id = "layers_products" if "product_codelist_id" not in metadata else metadata["layers_products"]
     product_codelist_version = "1.0" if "product_codelist_version" not in metadata else metadata["product_codelist_version"]
