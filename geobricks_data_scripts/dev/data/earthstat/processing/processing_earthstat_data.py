@@ -176,6 +176,16 @@ def move_storage_folder(base_folder, file_type="geotiff"):
             shutil.move(f, folder)
 
 
+def move_file_to_publish(src_folder, to_publish_folder, file_type="geotiff"):
+    files = glob.glob(os.path.join(src_folder, "*." + file_type))
+    print src_folder
+    for f in files:
+        print f
+        if os.path.isfile(f):
+            filename = get_filename(f)
+            shutil.copyfile(f, to_publish_folder + "/" + filename +"." + file_type)
+
+
 
 
 # load scripts
@@ -184,13 +194,24 @@ if __name__ == '__main__':
     dest_folder = "/home/vortex/Desktop/LAYERS/earthstat/earthstat_processeddata/"
 
 
-    #process(src_folder, dest_folder, "geoserver", "3857")
+    # process(src_folder, dest_folder, "geoserver", "3857")
     #process(src_folder, dest_folder, "storage", "4326")
 
-    #move_storage_folder(os.path.join(dest_folder, "earthstat_crop_area/storage/"))
-    #move_storage_folder(os.path.join(dest_folder, "earthstat_crop_yield/storage/"))
+    # MOVE TO PUBLISH FOLDER
+    to_publish_folder_crop_area = "/home/vortex/Desktop/LAYERS/earthstat/TO_PUBLISH/earthstat_crop_area"
+    to_publish_folder_crop_yield = "/home/vortex/Desktop/LAYERS/earthstat/TO_PUBLISH/earthstat_crop_yield"
+    #move_file_to_publish(dest_folder + "earthstat_crop_area/geoserver/", to_publish_folder_crop_area)
+    #move_file_to_publish(dest_folder + "earthstat_crop_area/storage/", to_publish_folder_crop_area)
+    #move_file_to_publish(dest_folder + "earthstat_crop_yield/geoserver/", to_publish_folder_crop_yield)
+    #move_file_to_publish(dest_folder + "earthstat_crop_yield/storage/", to_publish_folder_crop_yield)
 
-    # N.B. the final move has been made by hand
+
+    # This is used to create Storage folders to move to the server (INTHEORY IT'S NOT NEEDED)
+    # move_storage_folder(os.path.join(dest_folder, "earthstat_crop_area/storage/"))
+    # move_storage_folder(os.path.join(dest_folder, "earthstat_crop_yield/storage/"))
+
+
+    # NOT USED ANYMORE: N.B. the final move has been made MANUALLY
     # earthstat/earthstat_processeddata/
     # earthstat/earthstat_processeddata/geoserver/
     # earthstat/earthstat_processeddata/geoserver/earthstat_crop_area/
@@ -198,3 +219,4 @@ if __name__ == '__main__':
     # earthstat/earthstat_processeddata/storage/earthstat_crop_area/
     # earthstat/earthstat_processeddata/storage/earthstat_crop_area/abacaarea_4326/
     # etc...
+
