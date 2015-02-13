@@ -41,30 +41,30 @@ settings = {
 
         # Geoserver
         "geoserver": {
-            "geoserver_master": "http://http://fenix.fao.org:20200/geoserver/rest",
+            "geoserver_master": "http://fenix.fao.org:20200/geoserver/rest",
             "geoserver_slaves": [],
-            "username": "admin",
-            "password": "geoserver",
+            "username": "fenix",
+            "password": "Fenix2014",
         },
 
         # Metadata
         "metadata": {
-            "url_create_metadata": "http://localhost:7788/v2/msd/resources/metadata",
-            "url_get_metadata_uid": "http://localhost:7788/v2/msd/resources/metadata/uid/<uid>",
+            "url_create_metadata": "http://fenix.fao.org/d3s/msd/resources/metadata",
+            "url_get_metadata_uid": "http://fenix.fao.org/d3s/msd/resources/metadata/uid/<uid>",
 
             # delete metadata
-            "url_delete_metadata": "http://localhost:7788/v2/msd/resources/metadata/uid/<uid>",
+            "url_delete_metadata": "http://fenix.fao.org/d3s/msd/resources/metadata/uid/<uid>",
 
             # get metadata
-            "url_get_metadata": "http://localhost:7788/v2/msd/resources/find",
-            "url_get_metadata_full": "http://localhost:7788/v2/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
+            "url_get_metadata": "http://fenix.fao.org/d3s/msd/resources/find",
+            "url_get_metadata_full": "http://fenix.fao.org/d3s/msd/resources/metadata/uid/<uid>?full=true&dsd=true",
 
             # coding system
-            "url_create_coding_system": "http://localhost:7788/v2/msd/resources",
-            "url_data_coding_system": "http://localhost:7788/v2/msd/resources/data/uid/<uid>",
+            "url_create_coding_system": "http://fenix.fao.org/d3s/msd/resources",
+            "url_data_coding_system": "http://fenix.fao.org/d3s/msd/resources/data/uid/<uid>",
 
             # DSD
-            "url_overwrite_dsd_rid": "http://localhost:7788/v2/msd/resources/dsd"
+            "url_overwrite_dsd_rid": "http://fenix.fao.org/d3s/msd/resources/dsd"
         }
     }
 }
