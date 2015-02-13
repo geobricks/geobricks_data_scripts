@@ -1,6 +1,6 @@
 import glob
 import os
-from geobricks_data_scripts.test.utils.data_manager_util import get_data_manager
+from geobricks_data_scripts.prod.utils.data_manager_util import get_data_manager
 from geobricks_data_scripts.utils.harvest.publish_harvest import harvest_folder
 
 
