@@ -37,17 +37,19 @@ def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, p
             log.info(metadata)
             # check epsg
             if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] == "EPSG:3857":
+                # TODO: get code
                 update_dsd_layer_to_distribution_layer(data_manager, metadata)
 
 
-        # link 4326 layer to 3857 visualization layer
+        # link 4326 (or other Proj EPSG) layer to 3857 visualization layer
         for metadata in metadatas:
             log.info(metadata)
             # check epsg
             if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
+                # TODO: get code
                 update_dsd_layer_to_visualization_layer(data_manager, metadata, workspace)
-
     return metadatas
+
 
 def update_folder_style(data_manager, folder, style=None):
     '''
@@ -72,14 +74,16 @@ def update_folder_style(data_manager, folder, style=None):
 
 
 
-def update_dsd_layer_to_distribution_layer(data_manager, metadata):
+def update_dsd_layer_to_distribution_layer(data_manager, metadata, epsg_code):
     log.info(metadata)
-    update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], "4326", "distribution")
+    update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], epsg_code, "distribution")
+    #update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], "4326", "distribution")
 
 
-def update_dsd_layer_to_visualization_layer(data_manager, metadata, workspace):
+def update_dsd_layer_to_visualization_layer(data_manager, metadata, workspace, epsg_code):
     log.info(metadata)
-    update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], "3857", "visualization", workspace)
+    update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], epsg_code, "visualization", workspace)
+    #update_dsd_layer_with_layer_dist_or_vis(data_manager, metadata["uid"], "3857", "visualization", workspace)
 
 
 def publish_geoserver(data_manager, path, metadata):
