@@ -1,6 +1,7 @@
 import glob
 import os
 import shutil
+import copy
 from geobricks_common.core.log import logger
 from geobricks_common.core.filesystem import get_filename
 from geobricks_processing.core.processing_core import process_obj
@@ -119,10 +120,14 @@ def process(src_folder, dest_folder="", folder_type="geoserver", prj="3857", ove
             # dest_folder = create_output_folder(folder, folder_type, overwrite)
             files = glob.glob(os.path.join(folder, "*." + file_type))
             for f in files:
+                print f
+
                 if "area" in f:
                     output_path = os.path.join(dest_folder, "earthstat_crop_area")
                 elif "yield" in f:
                     output_path = os.path.join(dest_folder, "earthstat_crop_yield")
+
+
 
                 output_path = create_output_folder(output_path, folder_type, overwrite)
 
@@ -132,22 +137,32 @@ def process(src_folder, dest_folder="", folder_type="geoserver", prj="3857", ove
                 output_file_name = filename + "_" + prj + ".geotiff"
                 # TODO: switch between processes
                 print "Processing:", output_file_name
+
                 if prj == "3857":
+                    process_steps = copy.deepcopy(process_obj_3857)
                     # TODO: worksaround for the various sourcepath e dstpath
-                    process_obj_3857[0]["source_path"] = [f]
-                    process_obj_3857[1]["output_path"] = output_path
-                    process_obj_3857[1]["output_file_name"] = output_file_name
-                    for p in process_obj_3857:
+                    process_steps[0]["source_path"] = [f]
+                    process_steps[1]["output_path"] = output_path
+                    process_steps[1]["output_file_name"] = output_file_name
+                    for p in process_steps:
+                        print "-----------"
+                        print p
                         p["source_path"] = p["source_path"] if "source_path" in p else result
+                        print "source_path:", p["source_path"]
+                        if "output_path" in p: print "output_path:", p["output_path"]
+                        if "output_file_name" in p: print "output_file_name:",  p["output_file_name"]
                         result = process_obj(p)
                 elif prj == "4326":
-                    process_obj_4326[0]["source_path"] = [f]
-                    process_obj_4326[1]["output_path"] = output_path
-                    process_obj_4326[1]["output_file_name"] = output_file_name
-                    for p in process_obj_4326:
+                    process_steps = copy.deepcopy(process_obj_4326)
+                    process_steps[0]["source_path"] = [f]
+                    process_steps[1]["output_path"] = output_path
+                    process_steps[1]["output_file_name"] = output_file_name
+                    for p in process_steps:
                         p["source_path"] = p["source_path"] if "source_path" in p else result
                         result = process_obj(p)
 
+                # break
+            # break
 
 def create_output_folder(folder, folder_type="geoserver", overwrite=False):
     dest_folder = os.path.join(folder, folder_type)
@@ -190,20 +205,20 @@ def move_file_to_publish(src_folder, to_publish_folder, file_type="geotiff"):
 
 # load scripts
 if __name__ == '__main__':
-    src_folder  = "/home/vortex/Desktop/LAYERS/earthstat/175CropsYieldArea_geotiff/"
+    src_folder = "/home/vortex/Desktop/LAYERS/earthstat/175CropsYieldArea_geotiff/"
     dest_folder = "/home/vortex/Desktop/LAYERS/earthstat/earthstat_processeddata/"
 
 
-    # process(src_folder, dest_folder, "geoserver", "3857")
-    #process(src_folder, dest_folder, "storage", "4326")
+    #process(src_folder, dest_folder, "geoserver", "3857")
+    process(src_folder, dest_folder, "storage", "4326")
 
     # MOVE TO PUBLISH FOLDER
     to_publish_folder_crop_area = "/home/vortex/Desktop/LAYERS/earthstat/TO_PUBLISH/earthstat_crop_area"
     to_publish_folder_crop_yield = "/home/vortex/Desktop/LAYERS/earthstat/TO_PUBLISH/earthstat_crop_yield"
     #move_file_to_publish(dest_folder + "earthstat_crop_area/geoserver/", to_publish_folder_crop_area)
-    #move_file_to_publish(dest_folder + "earthstat_crop_area/storage/", to_publish_folder_crop_area)
+    move_file_to_publish(dest_folder + "earthstat_crop_area/storage/", to_publish_folder_crop_area)
     #move_file_to_publish(dest_folder + "earthstat_crop_yield/geoserver/", to_publish_folder_crop_yield)
-    #move_file_to_publish(dest_folder + "earthstat_crop_yield/storage/", to_publish_folder_crop_yield)
+    move_file_to_publish(dest_folder + "earthstat_crop_yield/storage/", to_publish_folder_crop_yield)
 
 
     # This is used to create Storage folders to move to the server (INTHEORY IT'S NOT NEEDED)

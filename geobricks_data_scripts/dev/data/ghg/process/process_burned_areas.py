@@ -1,6 +1,7 @@
 import glob
 import os
 import shutil
+import copy
 from geobricks_common.core.log import logger
 from geobricks_common.core.filesystem import get_filename
 from geobricks_processing.core.processing_core import process_obj
@@ -81,21 +82,23 @@ def process(src_folder, dest_folder, file_type):
 
                 # TODO: switch between processes
                 if prj == "3857":
+                    process_steps = copy.deepcopy(process_obj_3857)
                     output_file_name = filename + ".geotiff"
                     print "Processing:", output_file_name
                     # TODO: worksaround for the various sourcepath e dstpath
-                    process_obj_3857[0]["source_path"] = [f]
-                    process_obj_3857[0]["output_path"] = output_path
-                    process_obj_3857[0]["output_file_name"] = output_file_name
-                    for p in process_obj_3857:
+                    process_steps[0]["source_path"] = [f]
+                    process_steps[0]["output_path"] = output_path
+                    process_steps[0]["output_file_name"] = output_file_name
+                    for p in process_step:
                         p["source_path"] = p["source_path"] if "source_path" in p else result
                         result = process_obj(p)
                 elif prj == "4326":
+                    process_steps = copy.deepcopy(process_obj_4326)
                     output_file_name = filename + "_" + prj + ".geotiff"
                     print "Processing:", output_file_name
-                    process_obj_4326[0]["source_path"] = [f]
-                    process_obj_4326[0]["output_path"] = output_path
-                    process_obj_4326[0]["output_file_name"] = output_file_name
+                    process_steps[0]["source_path"] = [f]
+                    process_steps[0]["output_path"] = output_path
+                    process_steps[0]["output_file_name"] = output_file_name
                     for p in process_obj_4326:
                         p["source_path"] = p["source_path"] if "source_path" in p else result
                         result = process_obj(p)
