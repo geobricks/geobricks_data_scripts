@@ -1,5 +1,6 @@
 from geobricks_common.core.log import logger
 from geobricks_data_scripts.utils.harvest.harvest_rasters import harvest_raster_folder
+import sys
 
 log = logger(__file__)
 
@@ -7,7 +8,6 @@ log = logger(__file__)
 # TODO: apply publish on storage and geoserver
 def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, publish_on_storage=True, update_links=True, metadata_json=None):
     metadatas = harvest_raster_folder(folder)
-    print metadatas
 
     # harvest 3857 for publication
     for metadata in metadatas:
@@ -19,7 +19,6 @@ def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, p
             if publish_on_geoserver:
                 metadata = publish_geoserver(data_manager, metadata["path"], metadata)
                 log.info(metadata)
-
 
     # harvest 4326 (or others) to storage
     # it's done after the 3857 it's sure the metadata will be there

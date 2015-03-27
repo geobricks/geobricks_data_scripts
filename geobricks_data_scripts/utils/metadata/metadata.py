@@ -8,6 +8,7 @@ log = logger(__file__)
 def create_metadata(metadata):
     log.info(metadata)
 
+    map_projection_code = str(metadata["map_projection_code"])
     product_codelist_id = "layers_products" if "product_codelist_id" not in metadata else metadata["layers_products"]
     product_codelist_version = "1.0" if "product_codelist_version" not in metadata else metadata["product_codelist_version"]
 
@@ -27,7 +28,7 @@ def create_metadata(metadata):
                 "projection": {
                     "idCodeList": "mapProjections",
                     "version": "1.0",
-                    "codes": [{"code": metadata["map_projection_code"]}]
+                    "codes": [{"code": map_projection_code}]
                 }
             }
         },

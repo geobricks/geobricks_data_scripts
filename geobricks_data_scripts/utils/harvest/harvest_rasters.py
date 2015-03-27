@@ -123,6 +123,6 @@ def parse_filename(filename, map_projection_code, product_code=None):
 
 # TODO: check prj
 def check_prj(prj):
-    print "Check if prj is valid or is the name"
+    #print "Check if prj is valid"
     return True
 

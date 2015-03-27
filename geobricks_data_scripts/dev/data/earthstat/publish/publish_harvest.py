@@ -9,6 +9,6 @@ data_manager = get_data_manager()
 lang = "EN"
 workspace = "earthstat"
 
-metadatas = harvest_folder(data_manager, "/home/vortex/Desktop/LAYERS/earthstat/TO_PUBLISH/earthstat_crop_area/", workspace, False, False, False, None)
+metadatas = harvest_folder(data_manager, "/home/vortex/Desktop/LAYERS/earthstat/TO_PUBLISH/earthstat_crop_area/", workspace, True, True, True, None)
 print metadatas
 # harvest_folder(data_manager, "/home/vortex/Desktop/LAYERS/earthstat/earthstat_processeddata/geoserver/earthstat_crop_yield/", workspace)
