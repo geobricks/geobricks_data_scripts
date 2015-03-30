@@ -1,128 +1,126 @@
-import glob
 import os
+import glob
+from geobricks_common.core.log import logger
 from geobricks_data_scripts.dev.utils.data_manager_util import get_data_manager
-from geobricks_data_scripts.utils.harvest.publish_harvest import harvest_folder
+from geobricks_data_scripts.utils.harvest.publish_harvest import harvest_folder, update_folder_style
 
+log = logger(__file__)
 
 data_manager = get_data_manager()
 
-lang = "EN"
 workspace = "ghg"
 
-def get_maghg_defaultstyle_name(filename):
-    sldname = ""
-    if "FUELBIOMASS" in filename.upper():
-        sldname = "fuelbiomass"
-    elif "CH4_EF" in filename.upper():
-        sldname = "ch4_ef"
-    elif "CO2_EF" in filename.upper():
-        sldname = "co2_ef"
-    elif "N2O_EF" in filename.upper():
-        sldname = "n2o_ef"
-    elif "CH4" in filename.upper():
-        sldname = "ch4"
-    elif "CO2" in filename.upper():
-        sldname = "co2"
-    elif "DM" in filename.upper():
-        sldname = "dm"
-    elif "N2O" in filename.upper():
-        sldname = "n2o"
-    return sldname + "_emissions_burning_" + lang
-
-# harvest_folder(data_manager, "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/Theory_structure_novemeber_13/Cultivation_organic_soils_croplands/Cultivation_organic_soils_-_croplands/", workspace)
-# harvest_folder(data_manager, "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/Theory_structure_novemeber_13/GriddedLivestock/gridded_livestock_of_the_world_v_201/", workspace)
-# harvest_folder(data_manager, "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/Theory_structure_novemeber_13/JRC_CLIMATE_ZONE/JRC_climate_zone/", workspace)
-# harvest_folder(data_manager, "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/Theory_structure_novemeber_13/GLC2000/glc2000_v1/", workspace)
-# harvest_folder(data_manager, "/home/vortex/Deskt/op/LAYERS/GHG_13_NOVEMEBRE/Theory_structure_novemeber_13/GEZ/global_ecological_zones_GEZ/", workspace)
+def default_import(src_folder, defaultStyle=None):
+    metadata_json = None
+    if defaultStyle is not None:
+        metadata_json = {
+            "dsd": {
+                "defaultStyle": defaultStyle
+            }
+        }
+    harvest_folder(data_manager, src_folder, workspace, True, True, True, metadata_json)
 
 
-def harvest_burned_areas(src_folder, output_folder="output", ):
-    print "TODO:"
+def import_raster_3857():
+    print "Import Raster 3857--------------------"
+    base_folder = "/home/vortex/Desktop/LAYERS/ghg/geodata_handedoverto_simonem/3857_display_only/"
 
-# GHG-MAG
-# 4326
-def harvest_maghg_4326():
-    maghg_4326_folder = "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/MAGHG-data/OUTPUT/storage"
-    folders = glob.glob(os.path.join(maghg_4326_folder, "*"))
-    for folder in folders:
-        if os.path.isdir(folder):
-            harvest_folder(data_manager, folder, workspace)
+    # # CH4 Emissions Burning
+    # default_import(base_folder + "CH4_Emissions_Burning_ClosedShrublands", "ch4_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CH4_Emissions_Burning_Grasslands", "ch4_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CH4_Emissions_Burning_HumidTropicalForests", "ch4_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CH4_Emissions_Burning_OtherForests", "ch4_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CH4_Emissions_Burning_Peatlands", "ch4_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CH4_Emissions_Burning_Savanna", "ch4_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CH4_Emissions_Burning_WoodySavanna", "ch4_gfed4ba_emissions_burning_EN")
+    #
+    # # CO2 Emissions Burning
+    # default_import(base_folder + "CO2_Emissions_Burning_ClosedShrublands", "co2_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CO2_Emissions_Burning_Grasslands", "co2_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CO2_Emissions_Burning_HumidTropicalForests", "co2_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CO2_Emissions_Burning_OtherForests", "co2_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CO2_Emissions_Burning_Peatlands", "co2_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CO2_Emissions_Burning_Savanna", "co2_gfed4ba_emissions_burning_EN")
+    # default_import(base_folder + "CO2_Emissions_Burning_WoodySavanna", "co2_gfed4ba_emissions_burning_EN")
+    #
+    # # CO2_CultivationOrganicSoils (The layers have a json file for the style)
+    # default_import(base_folder + "CO2_CultivationOrganicSoils")
+    #
+    # # CultivationOrganicSoils (The layers have a json file for the style)
+    # default_import(base_folder + "CultivationOrganicSoils")
+    #
+    # # DM
+    # default_import(base_folder + "DM_Burning_ClosedShrublands", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_Grasslands", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_HumidTropicalForests", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_OpenShrublands", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_OtherForests", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_OtherForests", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_Peatlands", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_Savanna", "dm_gfed4_burning_EN")
+    # default_import(base_folder + "DM_Burning_WoodySavanna", "dm_gfed4_burning_EN")
+    #
+    # # ExtraTropical_Forests_EF (The layers have a json file for the style)
+    # default_import(base_folder + "ExtraTropical_Forests_EF")
+    #
+    # # FuelBiomass (The layers have a json file for the style)
+    # default_import(base_folder + "FuelBiomass")
+    #
+    # # GEZ2010
+    # default_import(base_folder + "GEZ2010")
+    #
+    # # GFED4 Burned Areas
+    # default_import(base_folder + "GFED4_BurnedAreas_ClosedShrubland", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_DeciduousBroadleafForest", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_DeciduousNeedleleafForest", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_Deforestation", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_EvergreenBroadleafForest", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_EvergreenNeedleleafForest", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_Grassland", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_MixedForest", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_OpenShrubland", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_OtherForest", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_Peatlands", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_Savanna", "gfed4_burnedarea_EN")
+    # default_import(base_folder + "GFED4_BurnedAreas_WoodySavanna", "gfed4_burnedarea_EN")
+    #
+    # # GLC2000
+    # default_import(base_folder + "GLC2000")
+    #
+    # # GriddedLivestock
+    # default_import(base_folder + "GriddedLivestock", "griddedlivestock_heads_EN")
+    #
+    # # HWSD
+    # default_import(base_folder + "HWSD", "hwsd_histosols_area_EN")
+    #
+    # # JRC_Climate
+    # default_import(base_folder + "JRC_Climate", "jrc_climate_zones_EN")
+    #
+    # N2O
+    # N.B. "N2O_CultivationOrganicSoils" ha come stile "cultivation_organicsoils_n2o_emissions"
+    default_import(base_folder + "N2O_CultivationOrganicSoils", "cultivation_organicsoils_n2o_emissions_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_ClosedShrublands", "n2o_gfed4ba_emissions_burning_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_Grasslands", "n2o_gfed4ba_emissions_burning_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_HumidTropicalForests", "n2o_gfed4ba_emissions_burning_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_OpenShrublands", "n2o_gfed4ba_emissions_burning_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_OtherForests", "n2o_gfed4ba_emissions_burning_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_Peatlands", "n2o_gfed4ba_emissions_burning_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_Savanna", "n2o_gfed4ba_emissions_burning_EN")
+    default_import(base_folder + "N2O_Emissions_Burning_WoodySavanna", "n2o_gfed4ba_emissions_burning_EN")
 
-# 3857
-def harvest_maghg_3857():
-    maghg_3857_folder = "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/MAGHG-data/OUTPUT/geoserver"
-    folders = glob.glob(os.path.join(maghg_3857_folder, "*"))
-    for folder in folders:
-        if os.path.isdir(folder):
-            harvest_folder(data_manager, folder, workspace)
+    # Burning Peatlands (The layers have a json file for the style)
+    default_import(base_folder + "Peatlands_EF")
+
+    # Savanna+Grassland_EF (The layers have a json file for the style)
+    default_import(base_folder + "Savanna_and_Grassland_EF")
+
+    # Emission Factor (The layers have a json file for the style)
+    default_import(base_folder + "Tropical_Forests_EF")
 
 
-def harvest_maghg_3857_updated_defaultstyle():
-    maghg_3857_folder = "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/MAGHG-data/OUTPUT/geoserver"
-    folders = glob.glob(os.path.join(maghg_3857_folder, "*"))
-    all_metadatas = []
-    for folder in folders:
-        if os.path.isdir(folder):
-            all_metadatas.append(harvest_folder(data_manager, folder, workspace, False, False, False))
+if __name__ == '__main__':
 
-    # update the metadata retrieved
-    for metadatas in all_metadatas:
-        for metadata in metadatas:
-            try:
-                print metadata["dsd"]["layerName"]
-                default_style = get_maghg_defaultstyle_name(metadata["dsd"]["layerName"])
-                data_manager.geoserver_manager.set_style(metadata["dsd"]["layerName"], default_style)
-            except Exception, e:
-                print "ERRRROOOOO!!!!!"
-                print e
-
-
-            # def create_storage_json_metadata(src_folder, code, product_codelist_id="layers_products"):
-            #     for glob=glob
-            #
-            #
-            # def create_product_json(code, product_codelist_id="layers_products"):
-            #     metadata = {
-            #         "meContent" : {
-            #             "seCoverage" : {
-            #                 "coverageSectors" : {
-            #                     "version" : "1.0",
-            #                     "codes" : [ {
-            #                                     "code" : code
-            #                                 } ],
-            #                     "idCodeList" : product_codelist_id
-            #                 }
-            #             }
-            #         }
-            #     }
-            #     return metadata
+    import_raster_3857()
 
 
 
-            # DIRTY PRODUCT FIX
-            # def update_maghg_4326_storage_product(folder, workspace):
-            #     # there is an issue with the product code of the 4326 layers (they need to be update with the 3857 relative one)
-            #     folders = glob.glob(os.path.join(folder, "*"))
-            #     for folder in folders:
-            #         if os.path.isdir(folder):
-            #             files = glob.glob(os.path.join(folder, "*.geotiff"))
-            #             for f in files:
-            #                 uid = workspace + ":"
-            #                 uid += "_".join(get_filename(f).lower().split("_")[:-1]) + "_3857"
-            #                 print uid
-            #                 try:
-            #                     metadata = data_manager.metadata_manager.get_by_uid(uid)
-            #                     print metadata["dsd"]["contextExtension"]["distribution"][0]["uid"]
-            #                 except Exception, e:
-            #                     print "ERROR: ", e
-
-            #data_manager.metadata_manager.update_metadata()
-
-
-
-#harvest_maghg_4326()
-#harvest_maghg_3857()
-#harvest_maghg_3857_updated_defaultstyle()
-
-# maghg_4326_folder = "/home/vortex/Desktop/LAYERS/GHG_13_NOVEMEBRE/MAGHG-data/OUTPUT/storage"
-# update_maghg_4326_storage_product(maghg_4326_folder, workspace)

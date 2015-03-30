@@ -1,4 +1,5 @@
 from geobricks_common.core.log import logger
+from geobricks_common.core.utils import dict_merge
 from geobricks_data_scripts.utils.harvest.harvest_rasters import harvest_raster_folder
 import sys
 
@@ -11,7 +12,15 @@ def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, p
 
     # harvest 3857 for publication
     for metadata in metadatas:
+
         log.info(metadata)
+
+        if metadata_json is not None:
+            metadata = dict_merge(metadata, metadata_json)
+
+        print metadata
+        log.info(metadata)
+
         # check epsg
         if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] == "EPSG:3857":
             if "workspace" not in metadata["dsd"]:
@@ -22,31 +31,31 @@ def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, p
 
     # harvest 4326 (or others) to storage
     # it's done after the 3857 it's sure the metadata will be there
-    for metadata in metadatas:
-        log.info(metadata)
-        if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
-            if publish_on_storage:
-                metadata = publish_storage(data_manager, metadata["path"], metadata, workspace)
-                log.info(metadata)
+    # for metadata in metadatas:
+    #     log.info(metadata)
+    #     if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
+    #         if publish_on_storage:
+    #             metadata = publish_storage(data_manager, metadata["path"], metadata, workspace)
+    #             log.info(metadata)
 
-    log.info(metadatas)
-    if update_links:
-        # link 3857 layer to 4326 distribution layer
-        for metadata in metadatas:
-            log.info(metadata)
-            # check epsg
-            if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] == "EPSG:3857":
-                # TODO: get code
-                update_dsd_layer_to_distribution_layer(data_manager, metadata)
-
-
-        # link 4326 (or other Proj EPSG) layer to 3857 visualization layer
-        for metadata in metadatas:
-            log.info(metadata)
-            # check epsg
-            if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
-                # TODO: get code
-                update_dsd_layer_to_visualization_layer(data_manager, metadata, workspace)
+    # log.info(metadatas)
+    # if update_links:
+    #     # link 3857 layer to 4326 distribution layer
+    #     for metadata in metadatas:
+    #         log.info(metadata)
+    #         # check epsg
+    #         if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] == "EPSG:3857":
+    #             # TODO: get code
+    #             update_dsd_layer_to_distribution_layer(data_manager, metadata)
+    #
+    #
+    #     # link 4326 (or other Proj EPSG) layer to 3857 visualization layer
+    #     for metadata in metadatas:
+    #         log.info(metadata)
+    #         # check epsg
+    #         if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
+    #             # TODO: get code
+    #             update_dsd_layer_to_visualization_layer(data_manager, metadata, workspace)
     return metadatas
 
 

@@ -5,6 +5,7 @@ data_manager = get_data_manager()
 layers = data_manager.get_all_layers()
 for layer in layers:
     try:
+        print layers
         if "ghg" in layer["dsd"]["workspace"]:
             data_manager.delete(layer["uid"])
         #data_manager.delete(layer["uid"])
