@@ -9,23 +9,30 @@ input_shp = '/home/vortex/Desktop/LAYERS/ghg/process_data/3857/CH4_Emissions_Bur
 filapath = '/home/vortex/Desktop/LAYERS/GAUL/simone/ita.shp'
 
 with fiona.open(input_gaul) as gaul:
+    # geom_gaul = []
+    # for g in gaul:
+    #     geom_gaul.append(shape(g['geometry']))
+    # print 'finished geometry'
+
     with fiona.open(input_shp) as shp:
         sink_schema = shp.schema.copy()
         with fiona.open(
-                    filapath, 'w',
-                    crs=shp.crs,
-                    driver=shp.driver,
-                    schema=sink_schema,
-            ) as sink:
-            for g in gaul:
-                if g['properties'].get('ADM0_NAME') == 'Italy':
-                    print g['properties'].get('ADM0_CODE'), g['properties'].get('ADM0_NAME')
-                    geom_gaul = shape(g['geometry'])
-                    for s in shp:
-                        #print s['properties']
-                        geom_shp = shape(s['geometry'])
-                        if geom_gaul.intersection(geom_shp):
-                            sink.write(s)
-                            print "daje"
-                    break
+                filapath, 'w',
+                crs=shp.crs,
+                driver=shp.driver,
+                schema=sink_schema,
+        ) as sink:
+            print 'here'
+            for s in shp:
+                geom_shp = shape(s['geometry'])
+
+            print "end"
+                # for g in geom_gaul:
+                #     if geom_shp.intersection(g):
+                #         sink.write(s)
+                #         print "daje"
+
+
+
+
 
