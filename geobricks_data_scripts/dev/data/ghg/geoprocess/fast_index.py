@@ -1,39 +1,36 @@
-import shapefile
-import shapely
+import fiona
+from shapely.geometry import shape
+import rtree
 
-#Load the shapefile of polygons and convert it to shapely polygon objects
-polygons_sf = shapefile.Reader("C:/PolygonShapeFile.shp")
-polygon_shapes = polygons_sf.shapes()
-polygon_points = [q.points for q in polygon_shapes ]
-from shapely.geometry import Polygon
-polygons = [Polygon(q) for q in polygon_points]
+def create_gaul_layers(filepath1, filepath2):
+    with fiona.open(filepath1, 'r') as layer1:
+        with fiona.open(filepath2, 'r') as layer2:
+            print "Preparing GAUL0 Indexes"
+            features = {}
+            index = rtree.index.Index()
+            for feat1 in layer1:
+                fid = int(feat1['id'])
+                print
+                gaul_code = feat1['properties'].get('ADM0_CODE')
+                geom1 = shape(feat1['geometry'])
+                index.insert(fid, geom1.bounds)
+                features[fid] = (feat1, geom1, gaul_code)
 
-#Load the shapefile of points and convert it to shapely point objects
-points_sf = shapefile.Reader("C:/PointShapeFile.shp")
-point_shapes = points_sf.shapes()
-from shapely.geometry import Point
-point_coords= [q.points[0] for q in point_shapes ]
-points = [Point(q.points[0]) for q in point_shapes ]
+            print "Start searching features"
+            for feat2 in layer2:
+                geom2 = shape(feat2['geometry'])
+                print "-------"
+                for fid in list(index.intersection(geom2.bounds)):
+                    if fid != int(feat2['id']):
+                        # check geometry intersection
+                        feat1, geom1, gaul_code = features[fid]
+                        print gaul_code
+            print "End"
 
-#Build a spatial index based on the bounding boxes of the polygons
-from rtree import index
-idx = index.Index()
 
-count = -1
-for q in polygon_shapes:
-    count +=1
-    idx.insert(count, q.bbox)
 
-#Assign one or more matching polygons to each point
-matches = []
-for i in range(len(points)): #Iterate through each point
-    temp= None
-    print "Point ", i
-    #Iterate only through the bounding boxes which contain the point
-    for j in idx.intersection( point_coords[i]):
-        #Verify that point is within the polygon itself not just the bounding box
-        if points[i].within(polygons[j]):
-            print "Match found! ",j
-            temp=j
-            break
-    matches.append(temp) #Either the first match found, or None for no matches
+filepath1 = '/home/vortex/Desktop/LAYERS/GAUL/simone/gaul0_2008.shp'
+filepath2 = '/home/vortex/Desktop/LAYERS/ghg/process_data/3857/CH4_Emissions_Burning_ClosedShrublands/CH4_GFED4BA_Emissions_Burning_ClosedShrublands_1998_3857.shp'
+
+
+create_gaul_layers(filepath1, filepath2)
