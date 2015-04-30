@@ -29,14 +29,14 @@ def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, p
                 metadata = publish_geoserver(data_manager, metadata["path"], metadata)
                 log.info(metadata)
 
-    # harvest 4326 (or others) to storage
-    # it's done after the 3857 it's sure the metadata will be there
-    # for metadata in metadatas:
-    #     log.info(metadata)
-    #     if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
-    #         if publish_on_storage:
-    #             metadata = publish_storage(data_manager, metadata["path"], metadata, workspace)
-    #             log.info(metadata)
+        # harvest 4326 (or others) to storage
+        # it's done after the 3857 it's sure the metadata will be there
+        for metadata in metadatas:
+            log.info(metadata)
+            if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
+                if publish_on_storage:
+                    metadata = publish_storage(data_manager, metadata["path"], metadata, workspace)
+                    log.info(metadata)
 
     # log.info(metadatas)
     # if update_links:
