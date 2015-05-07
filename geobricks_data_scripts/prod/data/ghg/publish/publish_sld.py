@@ -1,16 +1,21 @@
-from geobricks_geoserver_manager.config.config import config
-from geobricks_geoserver_manager.core.geoserver_manager_core import GeoserverManager
+from geobricks_data_scripts.prod.utils.data_manager_util import get_data_manager
 from geobricks_common.core.filesystem import get_filename
 import glob
 
 
 def import_slds():
-    geoserver_manager = GeoserverManager(config)
-    for path in glob.glob("/home/vortex/Desktop/LAYERS/ghg/geodata_handedoverto_simonem/*.sld"):
+    data_manager = get_data_manager()
+    for path in glob.glob("/home/vortex/repos/FENIX-MAPS/geobricks/geobricks_data_scripts/geobricks_data_scripts/geoserver_sld/*.sld"):
         with open(path, 'r') as f:
             data = f.read()
-            filename = get_filename(path).lower()
-            geoserver_manager.publish_style(filename + "_EN", data)
+            stylename = get_filename(path).lower()
+            # if stylename[-3:] == "_en":
+            #     stylename = stylename[:len(stylename)-3] + "_EN"
+            overwrite = False
+            print "Uploading Style: %s (overwrite %s) " % (stylename, overwrite)
+
+            data_manager.geoserver_manager.publish_style(stylename, data, overwrite)
+            #data_manager.geoserver_manager.delete_style(stylename)
 
 
-#import_slds()
+import_slds()
