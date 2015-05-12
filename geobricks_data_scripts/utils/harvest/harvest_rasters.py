@@ -99,7 +99,7 @@ def parse_filename(filename, map_projection_code, product_code=None):
     # it is gived by the product (TOdO: should it be common by all the layers?)
     defaultStyle = product_code + "_" + language.upper()
 
-    print "-------------"
+    print "Harvest raster:"
     print title, product_code, product_label, layerName, defaultStyle, fromdate, todate, prj
 
     metadata = {
