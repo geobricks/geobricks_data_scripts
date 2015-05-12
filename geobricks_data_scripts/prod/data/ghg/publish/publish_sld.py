@@ -9,8 +9,8 @@ def import_slds():
         with open(path, 'r') as f:
             data = f.read()
             stylename = get_filename(path).lower()
-            # if stylename[-3:] == "_en":
-            #     stylename = stylename[:len(stylename)-3] + "_EN"
+            if stylename[-3:] != "_en":
+                stylename += "_en"
             overwrite = False
             print "Uploading Style: %s (overwrite %s) " % (stylename, overwrite)
 
