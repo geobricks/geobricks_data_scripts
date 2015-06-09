@@ -4,9 +4,8 @@ data_manager = get_data_manager()
 layers = data_manager.get_all_layers()
 for layer in layers:
     try:
-        print layer["dsd"]
-        # if "earthstat" in layer["dsd"]["workspace"]:
-        #     data_manager.delete(layer["uid"])
+        print layer["uid"]
+        data_manager.delete(layer["uid"])
     except Exception, e:
-        print "Error", e
+        print e
         pass
