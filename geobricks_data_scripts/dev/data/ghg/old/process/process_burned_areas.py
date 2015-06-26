@@ -89,7 +89,7 @@ def process(src_folder, dest_folder, file_type):
                     process_steps[0]["source_path"] = [f]
                     process_steps[0]["output_path"] = output_path
                     process_steps[0]["output_file_name"] = output_file_name
-                    for p in process_step:
+                    for p in process_steps:
                         p["source_path"] = p["source_path"] if "source_path" in p else result
                         result = process_obj(p)
                 elif prj == "4326":

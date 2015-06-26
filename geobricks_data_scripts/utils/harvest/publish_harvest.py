@@ -21,6 +21,8 @@ def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, p
         print metadata
         log.info(metadata)
 
+
+        # TODO: rework the check on projection!!
         # check epsg
         if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] == "EPSG:3857":
             if "workspace" not in metadata["dsd"]:
@@ -32,8 +34,8 @@ def harvest_folder(data_manager, folder, workspace, publish_on_geoserver=True, p
         # harvest 4326 (or others) to storage
         # it's done after the 3857 it's sure the metadata will be there
         for metadata in metadatas:
-            log.info(metadata)
-            if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:3857":
+            # log.info(metadata)
+            if metadata["meReferenceSystem"]["seProjection"]["projection"]["codes"][0]["code"] != "EPSG:4326":
                 if publish_on_storage:
                     metadata = publish_storage(data_manager, metadata["path"], metadata, workspace)
                     log.info(metadata)
